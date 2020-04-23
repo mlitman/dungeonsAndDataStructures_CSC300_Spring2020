@@ -61,7 +61,7 @@ Student* LinkedListOfStudents::removeAtIndex(int index)
             //remove from the end
             StudentNode* currNode = this->head;
             //positions currNode to the guy before the last guy
-            for(int i = 0; i < this->count-1; i++)
+            for(int i = 0; i < this->count-2; i++)
             {
                 currNode = currNode->getNextNode();
             }
@@ -73,14 +73,40 @@ Student* LinkedListOfStudents::removeAtIndex(int index)
         else
         {
             //remove from the middle
-            //write code here
+            StudentNode* currNode = this->head;
+            for(int i = 0; i < index-1; i++)
+            {
+                currNode = currNode->getNextNode();
+            }
+            studentToReturn = currNode->getNextNode()->getPayload();
+            StudentNode* nodeToDelete = currNode->getNextNode();
+            currNode->setNextNode(nodeToDelete->getNextNode());
+            nodeToDelete->setNextNode(0);
+            delete nodeToDelete;
         }
+        this->count--;
         return studentToReturn;
     }
     
 }
 
+int LinkedListOfStudents::getCount()
+{
+    return this->count;
+}
+
 int LinkedListOfStudents::indexOf(Student* s)
 {
-
+    StudentNode* currNode = this->head;
+    int pos = 0;
+    while(currNode->getNextNode())
+    {
+        if(currNode->getPayload() == s)
+        {
+            return pos;
+        }
+        pos++;
+        currNode = currNode->getNextNode();
+    }
+    return -1;
 }

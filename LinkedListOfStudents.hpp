@@ -12,6 +12,7 @@ class LinkedListOfStudents
 
     public:
         LinkedListOfStudents();
+        int getCount();
         void addFront(Student* s);
         Student* getAtIndex(int index);
         Student* removeAtIndex(int index);

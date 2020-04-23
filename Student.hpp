@@ -14,6 +14,8 @@ class Student
 
     public:
         Student(string name);
+        string getName();
+        Room* getCurrentRoom();
 };
 
 #endif
