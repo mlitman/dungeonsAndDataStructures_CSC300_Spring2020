@@ -19,16 +19,40 @@ void Room::addDoor(Door* aDoor)
 
 void Room::addStudent(Student* aStudent)
 {
-    this->theStudents->addFront(aStudent);
+    if(this->theStudents->indexOf(aStudent) == -1)
+    {
+        this->theStudents->addFront(aStudent);
+        aStudent->setCurrentRoom(this);
+    } 
 }
 
-void Room::takeDoor(string direction)
+void Room::removeStudent(Student* aStudent)
+{
+    int indexOfStudent = this->theStudents->indexOf(aStudent);
+    if(indexOfStudent != -1)
+    {
+        this->theStudents->removeAtIndex(indexOfStudent);
+        aStudent->setCurrentRoom(0); //the student is in limbo
+    }
+}
+
+void Room::takeDoor(Student* aStudent, string direction)
 {
     Door* tempDoor;
+    Room* currentRoom = this;
     for(int i = 0; i < this->currentNumberOfDoors; i++)
     {
         tempDoor = this->collectionOfDoors[i];
-        ...///
+        if(tempDoor->getDirectionToOtherRoom(currentRoom) == direction)
+        {
+            Room* theOtherRoom = tempDoor->getTheOtherRoom(currentRoom);
+            
+            //remove the student from the current room
+            this->removeStudent(aStudent);
+
+            //put the student in the new room
+            theOtherRoom->addStudent(aStudent);
+        }
     }
 }
 

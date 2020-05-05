@@ -16,9 +16,11 @@ bool Door::hasDirection(string direction)
     return directionToRoomA == direction || directionToRoomB == direction;
 }
 
-void getDoor(string direction)
+Room* Door::getTheOtherRoom(Room* currentRoom)
 {
-    ...///
+    //in-line if statement
+    //boolean_expression?true-exp:false-exp;
+    return this->roomA == currentRoom?this->roomB:this->roomA;
 }
 
 string Door::getDirectionToOtherRoom(Room* currentRoom)

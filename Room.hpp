@@ -21,7 +21,8 @@ class Room
         void addDoor(Door* aDoor);
         void display();
         void addStudent(Student* aStudent);
-        void takeDoor(string direction);
+        void removeStudent(Student* aStudent);
+        void takeDoor(Student* aStudent, string direction);
 
 };
 #endif

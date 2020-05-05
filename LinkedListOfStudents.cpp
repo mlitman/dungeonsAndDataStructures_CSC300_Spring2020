@@ -97,6 +97,11 @@ int LinkedListOfStudents::getCount()
 
 int LinkedListOfStudents::indexOf(Student* s)
 {
+    if(!this->head)
+    {
+        return -1;
+    }
+
     StudentNode* currNode = this->head;
     int pos = 0;
     while(currNode->getNextNode())

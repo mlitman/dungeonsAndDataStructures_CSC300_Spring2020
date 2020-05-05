@@ -16,6 +16,7 @@ class Student
         Student(string name);
         string getName();
         Room* getCurrentRoom();
+        void setCurrentRoom(Room* aRoom);
 };
 
 #endif
