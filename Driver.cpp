@@ -3,6 +3,7 @@
 #include "Room.hpp"
 #include "Door.hpp"
 #include "Student.hpp"
+#include "Item.hpp"
 
 using namespace std;
 
@@ -21,12 +22,23 @@ int main()
     string command = "";
     lobby->addStudent(theStudent);
 
+    Item* chainsaw = new Item("a running chainsaw");
+    theStudent->addItem(chainsaw);
+
     while(command != "quit")
     {
         theStudent->getCurrentRoom()->display();
         cout << "Where would you like to go?: ";
         cin >> command; 
-        theStudent->getCurrentRoom()->takeDoor(theStudent, command);
+
+        if(command == "backpack")
+        {
+            theStudent->displayBackpackContents();
+        }
+        else
+        {
+            theStudent->getCurrentRoom()->takeDoor(theStudent, command);
+        } 
     }
     cout << "Goodbye!!!\n";
     return 0;
