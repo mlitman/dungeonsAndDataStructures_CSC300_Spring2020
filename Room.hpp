@@ -3,6 +3,7 @@
 
 #include <string>
 #include "LinkedListOfStudents.hpp"
+#include "Item.hpp"
 
 class Door; // allows us to reference door when door refereneces Room.
 
@@ -15,6 +16,9 @@ class Room
         Door* collectionOfDoors[10];
         int currentNumberOfDoors;
         LinkedListOfStudents* theStudents;
+        Item** collectionOfItems;
+        int maxItemCount;
+        int currentItemCount;
     
     public:
         Room(string title);
@@ -23,6 +27,9 @@ class Room
         void addStudent(Student* aStudent);
         void removeStudent(Student* aStudent);
         void takeDoor(Student* aStudent, string direction);
+        void displayItems();
+        bool addItem(Item* anItem);
+        Item* removeItem(string itemName);
 
 };
 #endif

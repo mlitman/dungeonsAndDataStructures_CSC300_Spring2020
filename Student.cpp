@@ -15,10 +15,39 @@ Student::Student(string name)
 
 void Student::displayBackpackContents()
 {
+    if(this->currentItemCount == 0)
+    {
+        cout << "Empty Backpack\n";
+        return;
+    }
+    else
+    {
+        for(int i = 0; i < this->currentItemCount; i++)
+        {
+            cout << this->backpack[i]->getName() << "\n";
+        }
+    }
+    
+    
+}
+
+Item* Student::removeItem(string itemName)
+{
     for(int i = 0; i < this->currentItemCount; i++)
     {
-        cout << this->backpack[i]->getName() << "\n";
+        if(this->backpack[i]->getName() == itemName)
+        {
+            //remove the item from our backpack
+            Item* itemToRemove = this->backpack[i];
+            for(int j = i; j < this->currentItemCount-1; j++)
+            {
+                this->backpack[j] = this->backpack[j+1];
+            }
+            this->currentItemCount--;
+            return itemToRemove;
+        }
     }
+    return 0;
 }
 
 bool Student::addItem(Item* anItem)

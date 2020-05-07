@@ -8,6 +8,9 @@ Room::Room(string title)
 {
     this->title = title;
     this->currentNumberOfDoors = 0;
+    this->maxItemCount = 100;
+    this->currentItemCount = 0;
+    this->collectionOfItems = (Item**)malloc(this->maxItemCount * sizeof(Item*));
 }
 
 void Room::addDoor(Door* aDoor)
@@ -78,4 +81,50 @@ void Room::display()
         cout << tempStudent->getName() << " ";
     }
     cout << "\n";
+    this->displayItems();
+    cout << "\n";
+
+}
+
+void Room::displayItems()
+{
+    cout << "Items Here: ";
+    for(int i = 0; i < this->currentItemCount; i++)
+    {
+        cout << this->collectionOfItems[i]->getName() << ", ";
+    }
+     cout << "\n";   
+}
+
+Item* Room::removeItem(string itemName)
+{
+    for(int i = 0; i < this->currentItemCount; i++)
+    {
+        if(this->collectionOfItems[i]->getName() == itemName)
+        {
+            //remove the item from our backpack
+            Item* itemToRemove = this->collectionOfItems[i];
+            for(int j = i; j < this->currentItemCount-1; j++)
+            {
+                this->collectionOfItems[j] = this->collectionOfItems[j+1];
+            }
+            this->currentItemCount--;
+            return itemToRemove;
+        }
+    }
+    return 0;
+}
+
+bool Room::addItem(Item* anItem)
+{
+    if(this->currentItemCount == this->maxItemCount)
+    {
+        return false;
+    }
+    else
+    {
+        this->collectionOfItems[this->currentItemCount] = anItem;
+        this->currentItemCount++;
+        return true;
+    } 
 }
